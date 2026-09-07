@@ -423,7 +423,7 @@ def section_meta(*styles: str) -> str:
 
 A_HEAD = f"{MEDIA}/dualform/alcibiades-a.webp"
 B_HEAD = f"{MEDIA}/dualform/alcibiades-b.webp"
-STAMP = f"{MEDIA}/lottie/stamp.json"
+STAMP = "/media/lottie/stamp.json"
 
 
 def render_index() -> str:
