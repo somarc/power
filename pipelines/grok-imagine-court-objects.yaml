@@ -1,0 +1,24 @@
+# TRUST BOUNDARY: this tracked YAML executes reviewed local shell commands.
+# It MUST be invoked with root --riverboat-gambler, inspected with --dry-run,
+# and run only in this trusted checkout. It performs no DA write.
+# Explicit operator request: "full riverboat grok imagine visualizations".
+name: power-grok-imagine-court-objects
+context:
+  org: somarc
+  repo: power
+  branch: main
+steps:
+  - id: orientation
+    command: status --format json
+
+  - id: toolchain
+    command: 'test -x /Users/mhess/.local/bin/grok && /Users/mhess/.local/bin/grok --version && command -v magick'
+    depends_on: [orientation]
+    requires_approval: true
+    timeout: 30s
+
+  - id: prepare-staging
+    command: 'mkdir -p .da/media-staging/raw media/briefs'
+    depends_on: [toolchain]
+    requires_approval: true
+    timeout: 30s

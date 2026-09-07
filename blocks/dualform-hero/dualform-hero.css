@@ -1,0 +1,213 @@
+/* Dualform hero — the man owns the first screen. No product-shot cage. */
+
+.dualform-hero {
+  --df-void: var(--field);
+  --df-ink: var(--ink);
+  --df-ink-soft: var(--ink-soft);
+  --df-signal: var(--material);
+  --df-mx: 54%;
+  --df-my: 46%;
+  --df-rx: 50%;
+  --df-ry: 42%;
+  --df-soft: 0.56;
+  --df-angle: -10deg;
+
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100svh - var(--nav-height));
+  margin: 0;
+  padding: 0;
+  background: var(--df-void);
+  color: var(--df-ink);
+}
+
+.dualform-hero .df-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  min-height: calc(100svh - var(--nav-height));
+  max-width: none;
+  margin: 0;
+  padding: clamp(3.5rem, 10vh, 6rem) clamp(1.25rem, 5vw, 4.5rem) clamp(2.5rem, 7vh, 4rem);
+}
+
+.dualform-hero .df-copy {
+  position: relative;
+  z-index: 3;
+  max-width: 34rem;
+  color: var(--df-ink);
+}
+
+.dualform-hero .df-eyebrow {
+  margin: 0 0 0.85em;
+  font-family: var(--label-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--df-signal);
+}
+
+.dualform-hero .df-copy h1,
+.dualform-hero .df-copy h2 {
+  max-width: 16ch;
+  margin: 0 0 0.3em;
+  font-family: var(--heading-font-family);
+  font-size: clamp(2.4rem, 9vw, 4.4rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--df-ink);
+}
+
+.dualform-hero .df-lede {
+  max-width: 32rem;
+  margin: 0 0 0.8em;
+  font-family: var(--body-font-family);
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--df-ink-soft);
+}
+
+.dualform-hero .df-copy a.button {
+  margin-block-start: 1rem;
+}
+
+.dualform-hero .df-stage {
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 0 22%;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  aspect-ratio: auto;
+  background: transparent;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: crosshair;
+  user-select: none;
+}
+
+@media (width < 900px) {
+  .dualform-hero .df-stage {
+    inset: 0;
+    opacity: 0.62;
+  }
+
+  .dualform-hero .df-copy {
+    text-shadow: 0 2px 28px color-mix(in oklch, var(--field) 85%, black);
+  }
+
+  .dualform-hero .df-copy h1,
+  .dualform-hero .df-copy h2 {
+    max-width: 12ch;
+  }
+}
+
+.dualform-hero .df-layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center end;
+}
+
+.dualform-hero .df-a {
+  z-index: 1;
+}
+
+.dualform-hero .df-layer picture,
+.dualform-hero .df-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 86% 58%;
+}
+
+.dualform-hero .df-b {
+  z-index: 2;
+
+  /* stylelint-disable property-no-vendor-prefix -- Safari needs -webkit-mask */
+  -webkit-mask-image: radial-gradient(
+    ellipse var(--df-rx, 50%) var(--df-ry, 42%)
+      at var(--df-mx, 54%) var(--df-my, 46%),
+    #000 0%,
+    #000 calc((1 - var(--df-soft, 0.56)) * 55%),
+    transparent calc(55% + var(--df-soft, 0.56) * 45%)
+  );
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  /* stylelint-enable property-no-vendor-prefix */
+
+  mask-image: radial-gradient(
+    ellipse var(--df-rx, 50%) var(--df-ry, 42%)
+      at var(--df-mx, 54%) var(--df-my, 46%),
+    #000 0%,
+    #000 calc((1 - var(--df-soft, 0.56)) * 55%),
+    transparent calc(55% + var(--df-soft, 0.56) * 45%)
+  );
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+.dualform-hero.static .df-b,
+.dualform-hero .df-stage.df-static-mask .df-b {
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-mask-image: radial-gradient(
+    ellipse 52% 44% at 56% 46%,
+    #000 0%,
+    #000 38%,
+    transparent 74%
+  );
+  /* stylelint-enable property-no-vendor-prefix */
+  mask-image: radial-gradient(
+    ellipse 52% 44% at 56% 46%,
+    #000 0%,
+    #000 38%,
+    transparent 74%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dualform-hero .df-b {
+    /* stylelint-disable property-no-vendor-prefix */
+    -webkit-mask-image: radial-gradient(
+      ellipse 52% 44% at 56% 46%,
+      #000 0%,
+      #000 38%,
+      transparent 74%
+    );
+    /* stylelint-enable property-no-vendor-prefix */
+    mask-image: radial-gradient(
+      ellipse 52% 44% at 56% 46%,
+      #000 0%,
+      #000 38%,
+      transparent 74%
+    );
+  }
+}
+
+.dualform-hero.compact {
+  min-height: min(72svh, 42rem);
+}
+
+.dualform-hero.compact .df-inner {
+  min-height: min(72svh, 42rem);
+}
+
+.dualform-hero.compact .df-copy h1,
+.dualform-hero.compact .df-copy h2 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+}
+
+main .section:has(.dualform-hero) {
+  margin: 0;
+  padding: 0;
+  background: var(--field);
+}
+
+main .section:has(.dualform-hero) > div {
+  max-width: none;
+  padding: 0;
+}

@@ -1,6 +1,8 @@
 footer {
-  background-color: var(--light-color);
+  background-color: var(--field);
+  color: var(--ink-soft);
   font-size: var(--body-font-size-xs);
+  border-block-start: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
 }
 
 footer .footer > div {

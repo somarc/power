@@ -1,5 +1,8 @@
 # AGENTS.md
 
+Personal Dualform corpus of the 48 Laws of Power. Org/repo: `somarc/power`.
+Direction: `DIRECTION.md`. Object: Alcibiades. Hands: `da-cli`.
+
 Edge Delivery Services. Read a block first. Omissions are in the repo or known.
 
 ## Avoid

@@ -1,0 +1,69 @@
+.law-index {
+  --li-rule: color-mix(in oklch, var(--ink) 16%, transparent);
+
+  margin: 0;
+  color: var(--ink);
+}
+
+.law-index .li-roll {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.law-index .li-row {
+  display: grid;
+  grid-template-columns: 3.4rem minmax(0, 1fr);
+  gap: 0.9rem 1.15rem;
+  align-items: baseline;
+  padding-block: 1.05rem;
+  border-block-end: 1px solid var(--li-rule);
+}
+
+.law-index .li-row:first-child {
+  border-block-start: 1px solid var(--li-rule);
+}
+
+.law-index .li-num {
+  font-family: var(--heading-font-family);
+  font-size: clamp(1.35rem, 1rem + 1.2vw, 1.8rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--material);
+}
+
+.law-index .li-title {
+  display: inline;
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.law-index a.li-title:hover,
+.law-index a.li-title:focus-visible {
+  color: var(--material);
+  text-decoration: none;
+}
+
+.law-index .li-lede {
+  margin: 0.35em 0 0;
+  max-width: 46rem;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+@media (width < 600px) {
+  .law-index .li-row {
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    gap: 0.5rem 0.75rem;
+  }
+}

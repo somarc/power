@@ -1,2 +1,7 @@
+scripts/vendor/**
 helix-importer-ui
-*.min.js
+coverage
+logs
+node_modules
+tools
+content-staging

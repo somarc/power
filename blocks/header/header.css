@@ -1,9 +1,11 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: color-mix(in oklch, var(--field) 88%, transparent);
+  backdrop-filter: blur(12px);
   width: 100%;
   z-index: 2;
   position: fixed;
+  border-block-end: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
 }
 
 header nav {
@@ -18,7 +20,10 @@ header nav {
   max-width: 1248px;
   height: var(--nav-height);
   padding: 0 24px;
-  font-family: var(--body-font-family);
+  font-family: var(--label-font-family);
+  font-size: var(--body-font-size-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 header nav[aria-expanded='true'] {

@@ -1,0 +1,48 @@
+.lottie-accent {
+  --la-size: clamp(5.5rem, 12vw, 8.5rem);
+
+  display: grid;
+  justify-items: start;
+  margin: 0;
+  color: var(--material);
+}
+
+.lottie-accent .la-stage {
+  display: grid;
+  justify-items: start;
+  gap: 0.4rem;
+}
+
+.lottie-accent .la-canvas {
+  inline-size: var(--la-size);
+  block-size: var(--la-size);
+}
+
+.lottie-accent .la-canvas svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.lottie-accent .la-caption {
+  margin: 0;
+  font-family: var(--label-font-family);
+  font-size: var(--body-font-size-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--material);
+}
+
+.lottie-accent.center {
+  justify-items: center;
+}
+
+.lottie-accent.center .la-stage {
+  justify-items: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lottie-accent .la-canvas {
+    opacity: 0.92;
+  }
+}

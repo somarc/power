@@ -1,0 +1,33 @@
+.power-point {
+  margin-block: clamp(2rem, 6vh, 3.5rem);
+  color: var(--ink);
+}
+
+.power-point .pp-quote {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding-inline-start: 1.15rem;
+  border-inline-start: 2px solid var(--material);
+  max-width: 42rem;
+}
+
+.power-point .pp-eye {
+  margin: 0;
+  font-family: var(--label-font-family);
+  font-size: var(--body-font-size-xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--material);
+}
+
+.power-point .pp-line {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: clamp(1.45rem, 1.1rem + 1.4vw, 2.15rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
