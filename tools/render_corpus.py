@@ -2,12 +2,15 @@
 """Render DA HTML for the Power corpus. Original commentary only."""
 from __future__ import annotations
 
+import sys
 from html import escape
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from figures import FIGURES, LAW_CASES, MEDIA, has_plates, plate
+
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "content-staging"
-MEDIA = "https://content.da.live/somarc/power/media"
 
 COURTS = [
     ("the-masters-house", "The master's house", "1–8", (1, 8)),
@@ -423,39 +426,68 @@ def section_meta(*styles: str) -> str:
 
 A_HEAD = f"{MEDIA}/dualform/alcibiades-a.webp"
 B_HEAD = f"{MEDIA}/dualform/alcibiades-b.webp"
+A_SHIELD = f"{MEDIA}/dualform/shield-a.webp"
+B_SHIELD = f"{MEDIA}/dualform/shield-b.webp"
 STAMP = "/media/lottie/stamp.json"
+
+
+def plates_for(slug: str) -> tuple[str, str, str, str]:
+    fig = FIGURES[slug]
+    name = fig["name"]
+    if has_plates(slug):
+        return (
+            plate(slug, "a"),
+            f"{name}, substrate — memory, paint, stone",
+            plate(slug, "b"),
+            f"{name} living — the same mass in the room",
+        )
+    return (
+        A_SHIELD,
+        "Bare bronze hoplite shield — the court as hardware",
+        B_SHIELD,
+        "The same shield bearing a gold gorgoneion — the court as device",
+    )
 
 
 def render_index() -> str:
     rows = []
     for law in LAWS:
+        case = LAW_CASES[law["n"]]
+        fig = FIGURES[case["figure"]]
         href = f"/laws/{law['n']:02d}-{law['slug']}"
         rows.append(
             f"<div><div>{law['n']:02d}</div>"
             f"<div><p><a href=\"{href}\">{escape(law['title'])}</a></p></div>"
-            f"<div><p>{escape(law['sentence'])}</p></div></div>"
+            f"<div><p>{escape(fig['name'])} — {escape(law['sentence'])}</p></div></div>"
         )
+    fig_links = []
+    for slug, fig in FIGURES.items():
+        if has_plates(slug):
+            fig_links.append(f'<p><a href="/figures/{slug}">{escape(fig["name"])}</a></p>')
     court_links = " ".join(
         f'<p><a href="/courts/{slug}">{escape(title)} ({span})</a></p>'
         for slug, title, span, _ in COURTS
     )
+    la, laa, lb, lba = plates_for("louis-xiv")
     main = f"""<div>
 {dualform(
-    "Marble · living",
-    "You never leave the man.",
-    "A personal corpus of the 48 Laws of Power, written as original commentary for 2026. The object is Alcibiades. The laws remap on one neck.",
-    A_HEAD,
-    "Marble bust of the so-called Alcibiades, Capitoline type, isolated on a wine-black field",
-    B_HEAD,
-    "The same silhouette living: Alcibiades as a man in a symposium, gold in the hair, eyes open",
+    "A court of the cited",
+    "Forty-eight laws. Many bodies.",
+    "A personal corpus of the 48 Laws of Power. Original commentary for 2026. Each law is a case file carried by someone Greene actually put on the page — Fouquet, Louis, Talleyrand, Bismarck, Elizabeth, Borgia, Caesar — not one neck for all forty-eight.",
+    la, laa, lb, lba,
 )}
 {section_meta()}
 </div>
 <div>
-<p>This is not a summary of Robert Greene. It is a court. Forty-eight rooms, six courts, one body. Historical cases sit on Plutarch, Thucydides, Xenophon, and Plato. Present cases sit on the public record of 2025–26 — labs, platforms, states, launches.</p>
-<p><strong><a href="/alcibiades">Alcibiades</a></strong> is the house object. If you cover the wordmark you should still know who you are looking at.</p>
+<p>This is not a summary of Robert Greene and not a shrine. It is a court. Historical cases sit on the figures the book cites, with primary sources under them (Voltaire, Machiavelli, Plutarch, Thucydides, Xenophon). Present cases sit on the public record of 2025–26.</p>
+<p><strong><a href="/figures/">The cited</a></strong> are the object. Alcibiades is one file — Laws 24, 25, 46, 48 — not the house.</p>
 {court_links}
 <p><em><a href="/laws/">Enter the laws</a></em></p>
+{section_meta("wide")}
+</div>
+<div>
+<h2>Faces in the court</h2>
+{''.join(fig_links)}
 {section_meta("wide")}
 </div>
 <div>
@@ -464,7 +496,7 @@ def render_index() -> str:
 {''.join(rows)}
 </div>
 {section_meta("wide")}
-{metadata("Power — 48 Laws", "A personal Dualform corpus of the 48 Laws of Power, with Alcibiades as the object. Original commentary for 2026.", A_HEAD)}
+{metadata("Power — 48 Laws", "A Dualform court of the 48 Laws of Power. Cited figures carry the rooms. Original commentary for 2026.", la)}
 </div>"""
     return page_shell(main)
 
@@ -491,7 +523,9 @@ def render_alcibiades() -> str:
 <p>He embodies Laws 6, 20, 24, 25, 48. He violates 1, 18, 19, 47. The violations kill him. The embodiments make him impossible to forget.</p>
 <p>Visual references (likeness, not a claim of portraiture): Capitoline MC 1160, photograph Marie-Lan Nguyen, 2011, CC BY 2.5; the labeled mosaic at Sparta (ΑΛΚΗΒΕΙΑΔΗΣ); the painted tradition of Socrates dragging him from vice (Regnault, Gérôme, Eckersberg) — useful as Victorian fever, not as evidence.</p>
 <p><em><a href="/laws/">The 48</a></em></p>
-{metadata("Alcibiades", "The house object of this corpus: Alcibiades as Dualform — marble and living, Athens and the next city.", B_HEAD)}
+<p>He belongs to Laws 24, 25, 46, and 48 in this court. He is not the court.</p>
+<p><a href="/figures/">The cited</a> · <a href="/laws/">The 48</a></p>
+{metadata("Alcibiades", "One file in the court: Alcibiades as Dualform — marble and living. Laws 24, 25, 46, 48.", B_HEAD)}
 </div>"""
     return page_shell(main)
 
@@ -507,12 +541,12 @@ def render_laws_index() -> str:
         )
     main = f"""<div>
 <h1>The 48</h1>
-<p>Six courts. One body. Original commentary — not a digest of Greene. Each law is a room you can stand in.</p>
+<p>Six courts. Many bodies. Original commentary — not a digest of Greene. Each law is a case file carried by a cited figure.</p>
 <div class="law-index">
 {''.join(rows)}
 </div>
 {section_meta("wide")}
-{metadata("The 48 Laws", "Index of the 48 Laws of Power as original 2026 commentary, with Alcibiades as the through-line.", A_HEAD)}
+{metadata("The 48 Laws", "Index of the 48 Laws of Power as original 2026 commentary, each law carried by a cited figure.", plate("louis-xiv", "a"))}
 </div>"""
     return page_shell(main)
 
@@ -528,15 +562,21 @@ def render_court(slug: str, title: str, span: str, lo: int, hi: int) -> str:
             f"<div><p><a href=\"{href}\">{escape(law['title'])}</a></p></div>"
             f"<div><p>{escape(law['sentence'])}</p></div></div>"
         )
+    # First plated figure in this court becomes the door.
+    door = "louis-xiv"
+    for law in LAWS:
+        if lo <= law["n"] <= hi:
+            slug = LAW_CASES[law["n"]]["figure"]
+            if has_plates(slug):
+                door = slug
+                break
+    da, daa, db, dba = plates_for(door)
     main = f"""<div>
 {dualform(
     f"Court · {span}",
     title,
-    "A chapter of one life, not a module in a course.",
-    A_HEAD,
-    "Alcibiades in marble — the court as memory",
-    B_HEAD,
-    "Alcibiades living — the court as presence",
+    "A chapter of the court, not a module in a course.",
+    da, daa, db, dba,
     "compact",
 )}
 {section_meta()}
@@ -556,6 +596,13 @@ def render_law(law: dict, prev_l: dict | None, next_l: dict | None) -> str:
     n = law["n"]
     _, court_title = court_for(n)
     num = f"{n:02d}"
+    case = LAW_CASES[n]
+    slug = case["figure"]
+    fig = FIGURES[slug]
+    history = case["history"]
+    reversal = case.get("reversal") or law["reversal"]
+    also = case.get("also") or []
+    da, daa, db, dba = plates_for(slug)
     prev_html = (
         f'<p><a href="/laws/{prev_l["n"]:02d}-{prev_l["slug"]}">← {prev_l["n"]:02d} {escape(prev_l["title"])}</a></p>'
         if prev_l else "<p></p>"
@@ -564,16 +611,20 @@ def render_law(law: dict, prev_l: dict | None, next_l: dict | None) -> str:
         f'<p><a href="/laws/{next_l["n"]:02d}-{next_l["slug"]}">{next_l["n"]:02d} {escape(next_l["title"])} →</a></p>'
         if next_l else "<p></p>"
     )
-    alc = f"<p><em>{escape(law['alc'])}</em></p>" if law.get("alc") else ""
+    also_html = ""
+    if also:
+        links = ", ".join(
+            f'<a href="/figures/{s}">{escape(FIGURES[s]["name"])}</a>' for s in also if s in FIGURES
+        )
+        if links:
+            also_html = f"<p>Also in this room: {links}.</p>"
+    fig_link = f'<p>Cited: <a href="/figures/{slug}">{escape(fig["name"])}</a> — {escape(fig["epithet"])}.</p>'
     main = f"""<div>
 {dualform(
-    f"Law {num} · {court_title}",
+    f"Law {num} · {escape(fig['name'])}",
     law["title"],
     escape(law["sentence"]),
-    A_HEAD,
-    "Alcibiades in marble — substrate of the law",
-    B_HEAD,
-    "Alcibiades living — the law as livery on one body",
+    da, daa, db, dba,
     "compact",
 )}
 {section_meta()}
@@ -596,20 +647,21 @@ def render_law(law: dict, prev_l: dict | None, next_l: dict | None) -> str:
 <h2>In the room</h2>
 <p>{escape(law["feel"])}</p>
 <h2>Then</h2>
-<p>{escape(law["history"])}</p>
+<p>{escape(history)}</p>
+{fig_link}
+{also_html}
 <h2>Now</h2>
 <p>{escape(law["now"])}</p>
 <h2>Reversal</h2>
-<p>{escape(law["reversal"])}</p>
-{alc}
+<p>{escape(reversal)}</p>
 <div class="columns">
 <div>
 <div>{prev_html}</div>
 <div>{next_html}</div>
 </div>
 </div>
-<p><a href="/laws/">The 48</a> · <a href="/alcibiades">Alcibiades</a></p>
-{metadata(f"Law {num}: {law['title']}", law["sentence"], B_HEAD)}
+<p><a href="/laws/">The 48</a> · <a href="/figures/">The cited</a></p>
+{metadata(f"Law {num}: {law['title']}", f"{fig['name']}. {law['sentence']}", db)}
 </div>"""
     return page_shell(main)
 
@@ -624,7 +676,7 @@ def render_nav() -> str:
 <div>
 <ul>
 <li><a href="/">House</a></li>
-<li><a href="/alcibiades">Alcibiades</a></li>
+<li><a href="/figures/">The cited</a></li>
 <li><a href="/laws/">The 48</a></li>
 <li><a href="/courts/the-masters-house">Courts</a></li>
 </ul>
@@ -641,13 +693,73 @@ def render_footer() -> str:
 <header></header>
 <main>
 <div>
-<p>A personal Dualform corpus. Original commentary on the 48 Laws of Power. Alcibiades is the object. 2026.</p>
-<p><a href="/alcibiades">The man</a> · <a href="/laws/">The laws</a></p>
+<p>A personal Dualform corpus. Original commentary on the 48 Laws of Power. A court of the cited. 2026.</p>
+<p><a href="/figures/">The cited</a> · <a href="/laws/">The laws</a></p>
 </div>
 </main>
 <footer></footer>
 </body>
 """
+
+
+def render_figures_index() -> str:
+    rows = []
+    for slug, fig in FIGURES.items():
+        laws = ", ".join(f"{n:02d}" for n in fig["laws"])
+        href = f"/figures/{slug}"
+        rows.append(
+            f"<div><div>{escape(fig['years'])}</div>"
+            f"<div><p><a href=\"{href}\">{escape(fig['name'])}</a></p></div>"
+            f"<div><p>{escape(fig['epithet'])}. Laws {laws}.</p></div></div>"
+        )
+    door = plates_for("talleyrand")
+    main = f"""<div>
+{dualform(
+    "The cited",
+    "A court, not a shrine.",
+    "Figures Greene actually put on the page. Dualform when we have a lockable likeness. A shield when we do not yet.",
+    door[0], door[1], door[2], door[3],
+)}
+{section_meta()}
+</div>
+<div>
+<div class="law-index">
+{''.join(rows)}
+</div>
+<p><a href="/laws/">The 48</a></p>
+{section_meta("wide")}
+{metadata("The cited", "Court of figures cited in the 48 Laws of Power — Dualform case files.", door[0])}
+</div>"""
+    return page_shell(main)
+
+
+def render_figure(slug: str) -> str:
+    fig = FIGURES[slug]
+    da, daa, db, dba = plates_for(slug)
+    law_links = []
+    for n in fig["laws"]:
+        law = next(L for L in LAWS if L["n"] == n)
+        law_links.append(
+            f'<p><a href="/laws/{n:02d}-{law["slug"]}">{n:02d} {escape(law["title"])}</a></p>'
+        )
+    main = f"""<div>
+{dualform(
+    f"{fig['years']}",
+    fig["name"],
+    escape(fig["epithet"]),
+    da, daa, db, dba,
+)}
+{section_meta()}
+</div>
+<div>
+<p>{escape(fig["dossier"])}</p>
+<p><em>{escape(fig["ref"])}</em></p>
+<h2>Rooms</h2>
+{''.join(law_links)}
+<p><a href="/figures/">The cited</a> · <a href="/laws/">The 48</a></p>
+{metadata(fig["name"], fig["dossier"][:180], db)}
+</div>"""
+    return page_shell(main)
 
 
 def write(path: Path, html: str) -> None:
@@ -662,6 +774,9 @@ def main() -> None:
     write(OUT / "nav.html", render_nav())
     write(OUT / "footer.html", render_footer())
     write(OUT / "alcibiades.html", render_alcibiades())
+    write(OUT / "figures" / "index.html", render_figures_index())
+    for slug in FIGURES:
+        write(OUT / "figures" / f"{slug}.html", render_figure(slug))
     write(OUT / "laws" / "index.html", render_laws_index())
     for slug, title, span, (lo, hi) in COURTS:
         write(OUT / "courts" / f"{slug}.html", render_court(slug, title, span, lo, hi))

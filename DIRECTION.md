@@ -15,29 +15,29 @@ EDS path: existing skill (eds-dualform) carrying one irreversible person; laws a
 Cite: https://www.trevornoah.com/ (person as house, 3 Sep 2026) · https://www.mosbyfiles.com/ (people as cases) · landonorris.com (same silhouette, remap is identity)
 
 ```text
-Subject: Alcibiades — the most beautiful, most dangerous Athenian; power as a man who changes sides without changing form
-Object:  his head. Marble (memory) ↔ living court (presence). The 48 laws remap like livery on that one mass.
-Law:     You never leave the man. One body. Two states. Native scroll. Lottie stamps the power point; it does not replace the still.
-Silence: chess, thrones, generic crowns, Roboto, ion blue, grok-house cube/Starship, Dualform lab proof-metaphors, card grid of 48 tiles as the first noun, Greene quote dumps, skill name in the H1, loader overture, scroll-jack
+Subject: A court of the cited — Greene’s actual bodies, each a case file
+Object:  the dossier of faces. Marble/paint (memory) ↔ living court (presence). Each law is carried by someone the book put on the page.
+Law:     You open a file, not a shrine. One Dualform per case. Native scroll. Lottie stamps the power point.
+Silence: chess, thrones, generic crowns, Roboto, ion, grok-house cube, Dualform cage, Alcibiades-as-only-neck, card grid, Greene quote dumps, skill name in the H1
 Room:    jury object, critic reading (editorial, no loader, native scroll)
-Veto:    keep the man. Cut the cage.
+Veto:    keep the court. Cut the shrine.
 
-Thesis:  Power is a body you can look in the eye.
-System:  dualform
+Thesis:  Power is a court you can look in the eye, one body at a time.
+System:  dualform + dossier
 Depth:   pointer (default morphing hole)
-Forbidden sibling: grok-house / grok-46 / da-cli Dualform lab — palette, Futura/Roboto pairing, Starship/cube Imagine dialect, boxed stage, after-hero card row
-Custom object: Capitoline “Alcibiades” (MC 1160) as Dualform specimen — A stone, B living
-Loved media job: identity
+Forbidden sibling: grok-house / grok-46 / da-cli Dualform lab — and the previous Alcibiades-only house
+Custom object: a hall of cited Dualform specimens (Fouquet, Louis, Talleyrand, Bismarck, Elizabeth, Borgia, Caesar…)
+Loved media job: identity of the case, not of one mascot
 ```
 
 ## Producer-taste card
 
 ```text
-Subject: Alcibiades
-Object:  the head
-Law:     one body, two states; laws remap as livery
-Silence: the Dualform cage, the course catalog, the skill
-Veto:    keep
+Subject: the cited court
+Object:  the dossier of faces
+Law:     one Dualform per case file
+Silence: the Alcibiades shrine, the Dualform cage, the course catalog
+Veto:    keep the court
 ```
 
 ## Taste card
@@ -45,8 +45,8 @@ Veto:    keep
 ```text
 Room:    both (jury object, critic reading)
 Cite:    Norris — identity as object; Trevor Noah 2026-09-03 — a person is the house
-Object:  the head
-Law:     one body, two states
+Object:  the dossier of faces
+Law:     one Dualform per case file
 Silence: the cage
 Veto:    keep
 ```
@@ -54,8 +54,8 @@ Veto:    keep
 ## Sean-the-visionary card
 
 ```text
-Object:  Alcibiades's head
-Law:     section grants full-bleed wine field; dualform-hero owns the mask; type inherits and captions the neck
+Object:  the cited face of the page
+Law:     section grants full-bleed wine field; dualform-hero owns the mask of that case; type inherits and captions the neck
 Owner:   section (field) + dualform-hero (remap) + lottie-accent (stamp)
 Inherit: --field --ink --material --type-display --type-body
 Refuse:  Roboto, ion, card grid, second LCP hero, Lenis, WebGL-only first paint
@@ -80,7 +80,7 @@ Not a course catalog. Six courts of one life:
 5. Timing — laws 33–40
 6. Formlessness — laws 41–48
 
-Homepage: the man. `/alcibiades`: the dossier. `/laws/nn-slug`: one law, one stamp, one reversal. The head is on every law page.
+Homepage: the court. `/figures/`: the cited. `/figures/{slug}`: one body. `/laws/nn-slug`: one law, that law’s figure, one stamp, one reversal. Alcibiades is Laws 24, 25, 46, 48 only.
 
 ## Copyright
 
