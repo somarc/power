@@ -1,12 +1,18 @@
 # Power — direction lock
 
 Wow-stack: eds-wow-stack + taste + producer-taste + sean-the-visionary
-Scout: 2026-09-06
-Heat: identity-as-site (Trevor Noah SOTD 2026-09-03, OFF+BRAND; Norris SOTY 2025); still-as-poster; catalog-as-object when the inventory is the thing
-Anti-heat: Dualform-as-hero cage; boxed mask; ion/brass observatory; Roboto; card-grid after-hero; skill name in the H1
-Mapped: dualform
-EDS path: existing skill (eds-dualform) carrying one irreversible person
-Cite: landonorris.com (one object, remap is identity) · trevornoah.com SOTD 2026-09-03 (a person is the house)
+Scout: 2026-09-06 (heat window 2026-07-21 → 2026-09-06)
+Heat:
+- One object or one body is the stage; the rest of the site orbits (Trevor Noah SOTD 3 Sep 2026; The Watch; Miu Miu house)
+- Two states as the interaction: day/night, sound on/off, seen/withheld (ERA Residence; Dualform is industry-current, not a house trick)
+- Corpus as interface: files, archives, memorials — not a card grid after the hero (Mosby’s Files SOTD 13 Aug 2026)
+Anti-heat:
+- Walkable WebGL portfolios and 0%-loader-as-show
+- Luxury CGI real-estate scroll clones of ERA
+- Dualform-as-hero cage; boxed mask; ion/brass observatory; Roboto; skill name in the H1
+Mapped: dualform + dossier (OTHER, no new skill)
+EDS path: existing skill (eds-dualform) carrying one irreversible person; laws as a file you open, not a course
+Cite: https://www.trevornoah.com/ (person as house, 3 Sep 2026) · https://www.mosbyfiles.com/ (people as cases) · landonorris.com (same silhouette, remap is identity)
 
 ```text
 Subject: Alcibiades — the most beautiful, most dangerous Athenian; power as a man who changes sides without changing form
