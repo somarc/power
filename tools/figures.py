@@ -758,7 +758,8 @@ LAW_CASES = {
 
 
 def plate(slug: str, state: str) -> str:
-    return f"{MEDIA}/dualform/{slug}-{state}.webp"
+    asset_slug = {"julius-caesar": "caesar"}.get(slug, slug)
+    return f"{MEDIA}/dualform/{asset_slug}-{state}.webp"
 
 
 def has_plates(slug: str) -> bool:
